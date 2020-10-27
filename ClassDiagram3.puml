@@ -1,0 +1,74 @@
+@@startuml
+class Game {
+    int ATTEMPTS_NUMBER=10
+    Attempt secretKey
+    Player player
+    Board board
+
+    String inputCombination()
+    void play()
+    boolean isSecretKey(Combination combination)
+}
+
+enum Colors {
+    BLUE 'b'
+    GREEN 'g'
+    CYAN 'c'
+    RED 'r'
+    PURPLE 'p'
+    ORANGE 'o'
+    VIOLET 'v'
+    YELLOW 'y'
+    
+    char nickname
+    char getNickname()
+    void setNickname(char nickname)
+    String printAllColors()
+    boolean contains(String inputs)
+    HashMap<Character, Colors> getMap()
+}
+
+class Combination {
+    int COMBINATION_NUMBER=4
+    Attempt attempt
+    Peg peg
+    String toString()
+}
+
+class Attempt { 
+    Colors[] colors
+    void setColors(String inputs)
+    Attempt getRandomAttempt()
+    void requestCombination(String inputs)
+    String toString()
+}
+
+Class Peg {
+    int[] pegs length=2
+    String toString()
+}
+
+class Player {
+    ArrayList<Combination> combinations
+    void readAttempt(String inputs)
+}
+
+class Board {
+    void print(ArrayList<Combination> combinations, Attempt secretKey,boolean displaySecretKey)
+}
+
+class ManagementIO {
+}
+
+Game --* Attempt
+Game --* Player
+Game --* Board
+Attempt "1" --* "COMBINATION_NUMBER" Colors 
+Combination --* Attempt
+Combination --* Peg
+Player "1" --* "ATTEMPTS_NUMBER" Combination
+Board ..> Combination
+Board ..> Attempt
+Game ..> ManagementIO
+Board ..> ManagementIO
+@@enduml
